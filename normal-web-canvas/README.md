@@ -4,6 +4,7 @@ This project is a simple web-based drawing canvas built built by me from scratch
 
 ## Features
 - Draw on the canvas using your mouse
+- The clear all button cleans the drawing
 - Adjust the width of the lines dynamically with the mouse wheel(width: 1-10)
 - Clean and minimal UI
 - No external libraries or frameworks
