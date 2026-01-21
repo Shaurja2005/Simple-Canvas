@@ -1,5 +1,8 @@
 const canvas = document.getElementById("graphics");
 const ctx = canvas.getContext("2d");
+const btn = document.getElementById("clearBTN");
+ctx.lineJoin = "round";
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -7,15 +10,18 @@ let isClicked = false;
 let lineWidth = 10;
 let temp = false;
 
+function reportWindowSize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize", reportWindowSize);
+
 document.addEventListener("mousedown", (event) => {
   if (event.button == 0 && !isClicked) {
     isClicked = true;
 
-    if (!temp) {
       temp = [event.clientX, event.clientY];
-    } else {
-      temp = [event.clientX, event.clientY];
-    }
   }
 
   console.log(isClicked);
@@ -32,6 +38,7 @@ document.addEventListener("mouseup", (event) => {
 document.addEventListener("mousemove", (event) => {
   if (isClicked) {
     ctx.beginPath();
+    ctx.lineCap = "round";
     ctx.moveTo(temp[0], temp[1]);
     ctx.lineTo(event.clientX, event.clientY);
     ctx.lineWidth = lineWidth;
@@ -48,4 +55,7 @@ document.addEventListener("wheel", (event) => {
   } else if (event.deltaY < 0 && lineWidth < 10) {
     lineWidth++;
   }
+});
+btn.addEventListener("click", () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
